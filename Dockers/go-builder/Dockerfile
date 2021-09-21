@@ -1,3 +1,3 @@
 FROM ubuntu:latest
 
-CMD sleep 9000
+CMD sleep 90000
