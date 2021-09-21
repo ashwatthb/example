@@ -19,4 +19,4 @@ jobs:
 
       - name: Build and push image
         run: |
-          docker build -t ashwatth:${VERSION} Dockers/go-builder
+          docker build -t ashwatth:${steps.get_version.outputs.VERSION } Dockers/go-builder
