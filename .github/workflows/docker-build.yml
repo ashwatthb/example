@@ -15,8 +15,8 @@ jobs:
 
       - name: Get the version
         id: get_version
-        run: echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/}
+        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
 
       - name: Build and push image
         run: |
-          docker build -t ashwatth:${{ steps.get_version.outputs.VERSION }} Dockers/go-builder
+          docker build -t ashwatth:$($env:GITHUB_REF -replace "refs/tags/") Dockers/go-builder
