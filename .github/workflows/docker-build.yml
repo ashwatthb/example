@@ -15,4 +15,4 @@ jobs:
 
       - name: Build and push image
         run: |
-          docker build -t ashwatth:${{ github.ref }} Dockers/go-builder
+          docker build -t ashwatth:${GITHUB_REF} Dockers/go-builder
