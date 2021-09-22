@@ -13,7 +13,7 @@ jobs:
 
       - name: Define docker image tag
         id: get_image_tag
-        run: echo ::set-output name=IMAGE_TAG::${$(grep 'GOLANG_IMAGE=golang:' Dockers/go-builder/Dockerfile | cut -d ":" -f 2)}
+        run: echo ::set-output name=IMAGE_TAG::${grep 'GOLANG_IMAGE=golang:' Dockers/go-builder/Dockerfile | cut -d ":" -f 2}
 
       - name: Build and push image
         run: |
