@@ -13,8 +13,12 @@ jobs:
 
       - name: Define docker image tag
         id: get_image_tag
-        run: echo "::set-output name=IMAGE_TAG::$(grep 'GOLANG_IMAGE=golang:' Dockers/go-builder/Dockerfile | cut -d ':' -f 2)"
+        run: |
+          echo "::set-output name=GO_LANG_VERSION::$(grep 'GOLANG_IMAGE=golang:' Dockers/go-builder/Dockerfile | cut -d ':' -f 2)"
+          echo "::set-output name=GIT_COMMIT_ID::${GITHUB_SHA::6}"
+
 
       - name: Build and push image
         run: |
-          docker build -t ashwatth:${{ steps.get_image_tag.outputs.IMAGE_TAG }} Dockers/go-builder
+          docker build -t ashwatth:${{ steps.get_image_tag.outputs.GO_LANG_VERSION }} Dockers/go-builder
+          docker tag ashwatth:${{ steps.get_image_tag.outputs.GO_LANG_VERSION }} ashwatth:${{ steps.get_image_tag.outputs.GIT_COMMIT_ID }}
